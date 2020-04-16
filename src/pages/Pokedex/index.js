@@ -26,7 +26,6 @@ function Pokedex({ route, navigation }) {
                     justifyContent: 'center',
                     fontSize: 50,
                     fontWeight: 'bold',
-                    fontFamily: 'sans-serif',
                     color: '#ffaa00',
                     alignSelf: 'center',
                     elevation: 8,
@@ -42,6 +41,7 @@ function Pokedex({ route, navigation }) {
             >
                 <View
                     style={{
+                        marginTop: 50,
                         alignItems: 'center',
                         flexDirection: 'row',
                         flexWrap: 'wrap'

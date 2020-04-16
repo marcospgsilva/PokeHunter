@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     StyleSheet,
     Text,
@@ -6,16 +6,22 @@ import {
     Image,
     TouchableOpacity,
     StatusBar,
+    Animated,
+    PanResponder,
+    ImageBackground,
+    SafeAreaView,
+    Platform
 } from 'react-native';
-import Constants from 'expo-constants'
+import { Easing } from 'react-native-reanimated';
 
 import api from '../../services/api'
 
+import Background from '../../../assets/background.jpg'
 import Pokeball from '../../../assets/pokeball.png'
 import Star from '../../../assets/star.png'
 import Pokedex from '../../../assets/pokedex.png'
 import Diamond from '../../../assets/diamond.png'
-import Ash from '../../../assets/ash.jpeg'
+import Avatar from '../../../assets/fotomp.jpg'
 
 const arr = []
 const number = 1
@@ -23,17 +29,80 @@ let flag = false
 
 export default function App({ navigation }) {
 
+    let textPosition = { x: 0, y: 0 }
+    let regionX1 = 0
+    let regionX2 = 0
+    let regionY1 = 0
+    let regionY2 = 0
+
+    function sortRegion() {
+        regionX1 = Math.floor(Math.random() * -200) + ((Math.random() * 9) % 2 == 0 ? - Math.random() * 200 : Math.random() * 200)
+        regionX2 = regionX1 + 50
+        regionY1 = Math.floor(Math.random() * -200) + ((Math.random() * 9) % 2 == 0 ? - Math.random() * 200 : Math.random() * 200)
+        regionY2 = regionY1 + 50
+
+        setHunt({ x1: regionX1, x2: regionX2, y1: regionY1, y2: regionY2 })
+    }
+
+    useEffect(() => {
+        sortRegion()
+    }, [])
+
+    const [hunt, setHunt] = useState({ x1: regionX1, x2: regionX2, y1: regionY1, y2: regionY2 })
     const [value, setValue] = useState(null)
     const [img, setImg] = useState('')
     const [name, setName] = useState('')
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoadingPokeball, setIsLoadingPokeball] = useState(true)
+    const [isLoadingMatch, setIsLoadingMatch] = useState(false)
+    const [isLoadingPoke, setIsLoadingPoke] = useState(false)
     const [diamond, setDiamond] = useState(0)
     const [key, setKey] = useState(0)
 
-    const sortPoke = () => {
-        setIsLoading(true)
-        const sort = Math.floor(Math.random() * 807) + 1
+    spinValue = new Animated.Value(0)
 
+    Animated.timing(
+        spinValue,
+        {
+            toValue: 1,
+            duration: 500,
+            easing: Easing.linear,
+            useNativeDriver: true
+        }
+    ).start()
+
+    const spin = this.spinValue.interpolate({
+        inputRange: [0, 1],
+        outputRange: ['0deg', '360deg']
+    })
+
+    const position = new Animated.ValueXY()
+    position.addListener(latestPosition => {
+        textPosition = latestPosition
+    })
+
+    const panResponder = PanResponder.create({
+        onStartShouldSetPanResponder: () => true,
+        onPanResponderMove: (e, gestureState) => {
+            const newPosition = { x: gestureState.dx, y: gestureState.dy }
+            position.setValue(newPosition)
+            if ((Math.floor(newPosition.x) >= hunt.x1 && Math.floor(newPosition.x) <= hunt.x2)
+                && (Math.floor(newPosition.y) >= hunt.y1 && Math.floor(newPosition.y) <= hunt.y2)) {
+                setIsLoadingPokeball(false)
+                setIsLoadingMatch(true)
+                handlePoke()
+            }
+        },
+        onPanResponderGrant: () => {
+            position.setOffset({ x: textPosition.x, y: textPosition.y })
+            position.setValue({ x: 0, y: 0 })
+        },
+        onPanResponderEnd: () => {
+            position.flattenOffset()
+        }
+    })
+
+    const sortPoke = () => {
+        const sort = Math.floor(Math.random() * 807) + 1
         return sort
     }
 
@@ -68,102 +137,110 @@ export default function App({ navigation }) {
         if (!flag) {
             arr.push({ img, key, id, number })
         }
-        console.log(arr)
-        setIsLoading(false)
+        setIsLoadingPoke(true)
+        setIsLoadingMatch(false)
     }
 
     return (
-        <View style={styles.container}>
-            <StatusBar barStyle="light-content" />
-
-            <View style={styles.header}>
-                <View style={{ marginRight: 5, marginLeft: '6%' }}>
-                    <Image
-                        source={Ash}
-                        style={{
-                            width: 70,
-                            height: 70,
-                            borderRadius: 60
-                        }} />
-                </View>
-                <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-                    <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 10 }}>
-                        <Image source={Star} style={{ width: 20, height: 20 }} />
-                        <Text style={styles.level}>Lv. 1</Text>
-                    </View>
-                    <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 10 }}>
-                        <Image source={Diamond} style={{ width: 20, height: 20 }} />
-                        <Text style={styles.diamondNumber}>{diamond}</Text>
-                    </View>
-                </View>
-            </View>
-
-            <View style={styles.body}>
-                <View style={styles.card}>
-                    {img != ''
-                        ? <Image source={{ uri: `${img}` }} style={styles.pokeImage} resizeMode="contain" />
-                        : <Image source={Pokeball} style={styles.pokeball} resizeMode="contain" />}
-                    {name != ''
-                        ?
-                        <>
-                            <Text style={styles.titleName}>{name}</Text>
-                            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                                <Image source={Diamond} resizeMode="contain" style={{ width: 20, height: 20 }} />
-                                <Text style={{ marginLeft: 3, fontSize: 20, fontWeight: '800', color: '#555' }}>{value}</Text>
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#222' }}>
+            <View style={styles.container}>
+                <StatusBar barStyle={Platform.OS === "ios" ? 'light-content' : 'light-content'} />
+                <ImageBackground
+                    source={Background}
+                    style={{ width: '100%', height: '100%' }}
+                >
+                    <View style={styles.header}>
+                        <View style={{ marginRight: 5, marginLeft: '2%' }}>
+                            <Image
+                                source={Avatar}
+                                style={{
+                                    width: 60,
+                                    height: 60,
+                                    borderRadius: 60
+                                }} />
+                        </View>
+                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+                            <View style={{ flexDirection: 'row', marginBottom: 5, justifyContent: 'center', alignItems: 'center', marginLeft: 10 }}>
+                                <Image source={Star} style={{ width: 20, height: 20 }} />
+                                <Text style={styles.level}>Lv. 1</Text>
                             </View>
-                        </>
-                        : <></>
-                    }
-                </View>
-                {isLoading === false
-                    ?
+                            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 10 }}>
+                                <Image source={Diamond} style={{ width: 20, height: 20 }} />
+                                <Text style={styles.diamondNumber}>{diamond}</Text>
+                            </View>
+                        </View>
+                    </View>
 
-                    <View style={styles.buttonBox}>
-                        <TouchableOpacity onPress={() => handlePoke()} hitSlop={{ top: 30, left: 150, bottom: 30, right: 150 }} >
-                            <Text style={styles.buttonTitle}>Caçar!</Text>
+                    <View style={styles.body}>
+                        {isLoadingPokeball
+                            ? <Animated.View
+                                {...panResponder.panHandlers}
+                                style={[styles.card, position.getLayout()]}>
+                                <Image source={Pokeball} style={styles.pokeball} resizeMode="contain" />
+                            </Animated.View>
+                            : <></>
+                        }
+                        {isLoadingPoke &&
+                            <Animated.View
+                                style={[styles.cardMatch, { transform: [{ rotateY: spin }] }]}>
+                                <Image source={{ uri: `${img}` }} style={styles.pokeImage} resizeMode="contain" />
+                                <Text style={styles.titleName}>{name}</Text>
+                                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                                    <Image source={Diamond} resizeMode="contain" style={{ width: 20, height: 20 }} />
+                                    <Text style={{ marginLeft: 3, fontSize: 20, fontWeight: '800', color: '#555' }}>{value}</Text>
+                                </View>
+                            </Animated.View>
+                        }
+                        {isLoadingPoke
+                            && <View style={styles.buttonBox}>
+                                <TouchableOpacity onPress={() => {
+                                    sortRegion()
+                                    setIsLoadingPoke(false)
+                                    setIsLoadingPokeball(true)
+                                }} hitSlop={{ top: 30, left: 150, bottom: 30, right: 150 }} >
+                                    <Text style={styles.buttonTitle}>Caçar Pokemon!</Text>
+                                </TouchableOpacity>
+                            </View>
+                        }
+                    </View>
+
+                    <View
+                        style={{
+                            flex: 1,
+                            marginBottom: '7%',
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}
+                    >
+                        <TouchableOpacity
+                            style={{
+                                width: 90,
+                                height: 90,
+                                elevation: 7,
+                                marginBottom: 20,
+                                backgroundColor: '#ffaa00',
+                                borderRadius: 50,
+                                shadowColor: 'rgb(0,0,0)',
+                                shadowOffset: { width: 2, height: 2 },
+                                shadowOpacity: 0.6,
+                                shadowRadius: 7
+                            }}
+                            title="Pokedex"
+                            onPress={() => {
+                                navigation.navigate('Pokedex', { arr: arr })
+                            }}>
+                            <Image
+                                source={Pokedex}
+                                style={{
+                                    width: 90,
+                                    height: 90
+                                }}
+                                resizeMode="contain" />
                         </TouchableOpacity>
                     </View>
-
-                    : <></>
-                }
+                </ImageBackground>
             </View>
-
-            <View
-                style={{
-                    flex: 1,
-                    marginBottom: '7%',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}
-            >
-                <TouchableOpacity
-                    style={{
-                        width: 80,
-                        height: 80,
-                        elevation: 7,
-                        backgroundColor: '#222',
-                        borderRadius: 50,
-                        shadowColor: 'rgb(0,0,0)',
-                        shadowOffset: { width: 2, height: 2 },
-                        shadowOpacity: 0.6,
-                        shadowRadius: 7
-                    }}
-                    title="Pokedex"
-                    onPress={() => {
-                        navigation.navigate('Pokedex', { arr: arr })
-                    }}>
-                    <Image
-                        source={Pokedex}
-                        style={{
-                            width: 80,
-                            height: 80
-                        }}
-                        resizeMode="contain" />
-                </TouchableOpacity>
-                <Text style={{ fontSize: 20, color: '#777', marginTop: 10 }}>Pokedex</Text>
-            </View>
-        </View>
-
+        </SafeAreaView >
     )
 }
 
@@ -171,15 +248,24 @@ const styles = StyleSheet.create({
     container: {
         flex: 12,
         backgroundColor: '#222',
-        justifyContent: 'center',
+        justifyContent: 'center'
+
     },
     header: {
-        flex: 1,
-        marginTop: Constants.statusBarHeight,
-        marginLeft: 20,
+        marginTop: 10,
+        marginLeft: 10,
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
+        paddingVertical: 5,
+        width: '80%',
+        borderRadius: 50,
+        backgroundColor: '#333',
+        shadowColor: "rgb(0, 0, 0)",
+        shadowOffset: { width: 3, height: 3 },
+        shadowOpacity: 0.4,
+        shadowRadius: 5,
+        elevation: 5
     },
     body: {
         flex: 10,
@@ -203,9 +289,22 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 20,
         borderRadius: 25,
+        height: '30%',
+        width: '30%'
+    },
+    cardMatch: {
+        alignSelf: 'center',
+        alignItems: 'center',
+        shadowColor: "rgb(0, 0, 0)",
+        shadowOffset: { width: 1, height: 1 },
+        shadowOpacity: 0.4,
+        shadowRadius: 5,
+        padding: 20,
+        borderRadius: 25,
         height: '60%',
-        width: '80%',
-        backgroundColor: '#fff'
+        width: '60%',
+        backgroundColor: '#FFF',
+        elevation: 5
     },
     pokeImage: {
         shadowColor: "rgb(0, 0, 0)",
@@ -223,8 +322,8 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 1, height: 1 },
         shadowOpacity: 0.4,
         shadowRadius: 5,
-        height: '75%',
-        width: '75%'
+        height: '90%',
+        width: '90%'
     },
     defaultTitle: {
         alignSelf: 'center',
@@ -239,19 +338,25 @@ const styles = StyleSheet.create({
         height: 60,
         width: '80%',
         marginTop: 20,
-        backgroundColor: '#ffaa00'
+        marginBottom: 10,
+        backgroundColor: '#ffaa00',
+        shadowColor: "rgb(0, 0, 0)",
+        shadowOffset: { width: 3, height: 3 },
+        shadowOpacity: 0.4,
+        shadowRadius: 3,
+        elevation: 5
     },
     buttonTitle: {
         justifyContent: 'center',
         alignItems: 'center',
         fontSize: 35,
         color: '#222',
-        fontWeight: '800'
+        fontWeight: 'bold'
     },
     titleName: {
         marginTop: 10,
         fontSize: 35,
         color: '#555',
-        fontWeight: '800'
+        fontWeight: 'bold'
     }
 });
