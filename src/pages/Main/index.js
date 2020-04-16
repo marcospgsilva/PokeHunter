@@ -30,10 +30,7 @@ let flag = false
 export default function App({ navigation }) {
 
     let textPosition = { x: 0, y: 0 }
-    let regionX1 = 0
-    let regionX2 = 0
-    let regionY1 = 0
-    let regionY2 = 0
+    let regionX1, regionX2, regionY1, regionY2
 
     function sortRegion() {
         regionX1 = Math.floor(Math.random() * -200) + ((Math.random() * 9) % 2 == 0 ? - Math.random() * 200 : Math.random() * 200)
@@ -53,7 +50,6 @@ export default function App({ navigation }) {
     const [img, setImg] = useState('')
     const [name, setName] = useState('')
     const [isLoadingPokeball, setIsLoadingPokeball] = useState(true)
-    const [isLoadingMatch, setIsLoadingMatch] = useState(false)
     const [isLoadingPoke, setIsLoadingPoke] = useState(false)
     const [diamond, setDiamond] = useState(0)
     const [key, setKey] = useState(0)
@@ -88,7 +84,6 @@ export default function App({ navigation }) {
             if ((Math.floor(newPosition.x) >= hunt.x1 && Math.floor(newPosition.x) <= hunt.x2)
                 && (Math.floor(newPosition.y) >= hunt.y1 && Math.floor(newPosition.y) <= hunt.y2)) {
                 setIsLoadingPokeball(false)
-                setIsLoadingMatch(true)
                 handlePoke()
             }
         },
@@ -138,7 +133,6 @@ export default function App({ navigation }) {
             arr.push({ img, key, id, number })
         }
         setIsLoadingPoke(true)
-        setIsLoadingMatch(false)
     }
 
     return (
@@ -154,17 +148,17 @@ export default function App({ navigation }) {
                             <Image
                                 source={Avatar}
                                 style={{
-                                    width: 60,
-                                    height: 60,
-                                    borderRadius: 60
+                                    width: 40,
+                                    height: 40,
+                                    borderRadius: 40
                                 }} />
                         </View>
-                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+                        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                             <View style={{ flexDirection: 'row', marginBottom: 5, justifyContent: 'center', alignItems: 'center', marginLeft: 10 }}>
                                 <Image source={Star} style={{ width: 20, height: 20 }} />
                                 <Text style={styles.level}>Lv. 1</Text>
                             </View>
-                            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 10 }}>
+                            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginRight: 10 }}>
                                 <Image source={Diamond} style={{ width: 20, height: 20 }} />
                                 <Text style={styles.diamondNumber}>{diamond}</Text>
                             </View>
@@ -252,13 +246,18 @@ const styles = StyleSheet.create({
 
     },
     header: {
+        zIndex: 2,
         marginTop: 10,
         marginLeft: 10,
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
         paddingVertical: 5,
-        width: '80%',
+        width: '95%',
+        borderLeftWidth: 3,
+        borderBottomWidth: 3,
+        borderRightWidth: 3,
+        borderColor: '#ffaa00',
         borderRadius: 50,
         backgroundColor: '#333',
         shadowColor: "rgb(0, 0, 0)",
@@ -315,6 +314,7 @@ const styles = StyleSheet.create({
         width: '75%'
     },
     pokeball: {
+        zIndex: 1,
         flex: 1,
         justifyContent: 'center',
         alignSelf: 'center',
@@ -355,7 +355,7 @@ const styles = StyleSheet.create({
     },
     titleName: {
         marginTop: 10,
-        fontSize: 35,
+        fontSize: 25,
         color: '#555',
         fontWeight: 'bold'
     }
