@@ -6,7 +6,7 @@ import styles from './styles';
 import ArrowRight from '../../../../assets/arrowRight.png'
 import ArrowLeft from '../../../../assets/arrowLeft.png'
 
-export default function Details({ pos, setPos, arr }) {
+export default function Details({ pos, setPos, arr, setGreen, setRed }) {
 
     const addPos = () => {
         if (pos < (arr.length - 1)) {
@@ -20,6 +20,24 @@ export default function Details({ pos, setPos, arr }) {
         }
     }
 
+    const rightClick = () => {
+
+        setTimeout(() => {
+            setGreen(true)
+        }, 100)
+
+        setGreen(false)
+    }
+
+    const leftClick = () => {
+
+        setTimeout(() => {
+            setRed(false)
+        }, 100)
+
+        setRed(true)
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.boxButton1}>
@@ -27,6 +45,7 @@ export default function Details({ pos, setPos, arr }) {
                     style={styles.button1}
                     onPress={() => {
                         subPos()
+                        leftClick()
                     }}
                 >
                     <Image source={ArrowLeft} style={{ width: 90, height: 90 }} resizeMode="contain" />
@@ -35,6 +54,7 @@ export default function Details({ pos, setPos, arr }) {
                     style={styles.button2}
                     onPress={() => {
                         addPos()
+                        rightClick()
                     }}
                 >
                     <Image source={ArrowRight} style={{ width: 90, height: 90 }} resizeMode="contain" />
