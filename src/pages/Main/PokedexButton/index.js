@@ -3,7 +3,7 @@ import { View, TouchableOpacity, Image } from 'react-native';
 
 import styles from './styles';
 
-import PokedexImg from '../../../../assets/pokedex.png'
+import PokedexImg from '../../../assets/pokedex.png'
 
 export default function PokedexButton({ navigation, arr }) {
     return (

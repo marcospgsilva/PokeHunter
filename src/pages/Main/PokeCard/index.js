@@ -3,7 +3,7 @@ import { View, Animated, Text, Image } from 'react-native';
 
 import styles from './styles';
 
-import Diamond from '../../../../assets/diamond.png'
+import Diamond from '../../../assets/diamond.png'
 
 export default function PokeCard({ spin, img, name, value }) {
     return (

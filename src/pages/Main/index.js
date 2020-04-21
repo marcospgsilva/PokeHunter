@@ -14,7 +14,7 @@ import api from '../../services/api'
 
 import styles from './styles'
 
-import Background from '../../../assets/background.jpg'
+import Background from '../../assets/background.jpg'
 
 import Header from './Header'
 import Body from './Body'

@@ -2,9 +2,9 @@ import React from 'react';
 import { View, Image, Text } from 'react-native';
 
 import styles from './styles';
-import Avatar from '../../../../assets/fotomp.jpg'
-import Star from '../../../../assets/star.png'
-import Diamond from '../../../../assets/diamond.png'
+import Avatar from '../../../assets/fotomp.jpg'
+import Star from '../../../assets/star.png'
+import Diamond from '../../../assets/diamond.png'
 
 export default function Header({ diamond }) {
     return (

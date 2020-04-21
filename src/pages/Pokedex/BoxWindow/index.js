@@ -6,7 +6,7 @@ import styles from './styles';
 import Window from '../Window'
 import Circle from '../Circle'
 
-import Bars from '../../../../assets/bars.png'
+import Bars from '../../../assets/bars.png'
 
 export default function BoxWindow({ arr, pos }) {
     return (

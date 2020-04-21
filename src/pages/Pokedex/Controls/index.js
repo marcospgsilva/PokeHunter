@@ -3,8 +3,8 @@ import { View, Image, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 
-import ArrowRight from '../../../../assets/arrowRight.png'
-import ArrowLeft from '../../../../assets/arrowLeft.png'
+import ArrowRight from '../../../assets/arrowRight.png'
+import ArrowLeft from '../../../assets/arrowLeft.png'
 
 export default function Details({ pos, setPos, arr, setGreen, setRed }) {
 

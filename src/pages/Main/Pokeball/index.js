@@ -2,7 +2,7 @@ import React from 'react';
 import { Animated, Image } from 'react-native';
 
 
-import PokeballImg from '../../../../assets/pokeball.png'
+import PokeballImg from '../../../assets/pokeball.png'
 
 import styles from './styles';
 
