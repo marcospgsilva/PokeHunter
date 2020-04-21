@@ -23,10 +23,10 @@ export default function Details({ pos, setPos, arr, setGreen, setRed }) {
     const rightClick = () => {
 
         setTimeout(() => {
-            setGreen(true)
+            setGreen(false)
         }, 100)
 
-        setGreen(false)
+        setGreen(true)
     }
 
     const leftClick = () => {

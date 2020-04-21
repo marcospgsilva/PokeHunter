@@ -6,9 +6,9 @@ import {
 
 import styles from './styles'
 
-import Header from '../../components/Pokedex/Header'
-import Body from '../../components/Pokedex/Body'
-import Footer from '../../components/Pokedex/Footer'
+import Header from './Header'
+import Body from './Body'
+import Footer from './Footer'
 
 function Pokedex({ route, navigation }) {
 

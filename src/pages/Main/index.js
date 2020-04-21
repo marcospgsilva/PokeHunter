@@ -16,9 +16,9 @@ import styles from './styles'
 
 import Background from '../../../assets/background.jpg'
 
-import Header from '../../components/Main/Header'
-import Body from '../../components/Main/Body'
-import PokedexButton from '../../components/Main/PokedexButton'
+import Header from './Header'
+import Body from './Body'
+import PokedexButton from './PokedexButton'
 
 const arr = []
 const number = 1
@@ -123,10 +123,13 @@ export default function App({ navigation }) {
 
         let img = `https://pokeres.bastionbot.org/images/pokemon/${id}.png`
 
+
+
         setValue(id)
         setImg(img)
         setName(name)
         setDiamond(diamond + id)
+
         setKey(key + 1)
         arr.map(item => {
             if (item.id == id) {
@@ -138,6 +141,7 @@ export default function App({ navigation }) {
         if (!flag) {
             arr.push({ img, key, id, number })
         }
+        console.log(arr)
         setIsLoadingPoke(true)
     }
 

@@ -15,7 +15,7 @@ export default function MediumCircle({ pos, green, red }) {
             }
             <Circle MediumColor={'#FECB65'} SmallColor={'#FEFECB'} />
 
-            {green == true
+            {green == false
                 ? <Circle MediumColor={'#32CB65'} SmallColor={'#98FE00'} />
                 : <Circle MediumColor={'#98FE00'} SmallColor={'#32CB65'} />
             }
