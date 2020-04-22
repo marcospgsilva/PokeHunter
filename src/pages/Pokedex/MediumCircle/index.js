@@ -1,12 +1,16 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import { useLight } from '../../../store/context'
 
 import styles from './styles';
 
 import Circle from '../Circle'
 
 
-export default function MediumCircle({ pos, green, red }) {
+export default function MediumCircle({ pos }) {
+
+    const { green, red } = useLight()
+
     return (
         <View style={styles.container}>
             {red == false

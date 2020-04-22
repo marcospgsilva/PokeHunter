@@ -7,6 +7,7 @@ import Star from '../../../assets/star.png'
 import Diamond from '../../../assets/diamond.png'
 
 export default function Header({ diamond }) {
+
     return (
         <View style={styles.header}>
             <View style={styles.avatarBox}>

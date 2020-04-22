@@ -1,12 +1,15 @@
 import React from 'react';
 import { View, Image, TouchableOpacity } from 'react-native';
+import { useLight } from '../../../store/context'
 
 import styles from './styles';
 
 import ArrowRight from '../../../assets/arrowRight.png'
 import ArrowLeft from '../../../assets/arrowLeft.png'
 
-export default function Details({ pos, setPos, arr, setGreen, setRed }) {
+export default function Details({ pos, setPos, arr }) {
+
+    const { setRed, setGreen } = useLight()
 
     const addPos = () => {
         if (pos < (arr.length - 1)) {
