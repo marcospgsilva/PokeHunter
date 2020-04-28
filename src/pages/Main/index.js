@@ -33,6 +33,8 @@ export default function App({ navigation }) {
     const [value, setValue] = useState(null)
     const [img, setImg] = useState('')
     const [name, setName] = useState('')
+    const [pokeTypes,setPokeTypes] = useState([])
+    const [level,setLevel] = useState(1)
     const [isLoadingPokeball, setIsLoadingPokeball] = useState(true)
     const [isLoadingPoke, setIsLoadingPoke] = useState(false)
     const [diamond, setDiamond] = useState(0)
@@ -120,16 +122,18 @@ export default function App({ navigation }) {
         const response = await api.get(`pokemon/${id}`)
 
         let name = response.data.name
+        let type = response.data.types
 
         let img = `https://pokeres.bastionbot.org/images/pokemon/${id}.png`
-
-
 
         setValue(id)
         setImg(img)
         setName(name)
+        setPokeTypes(type)
         setDiamond(diamond + id)
-
+        if(diamond >= level * 1000){
+            setLevel(level + 1)
+        }
         setKey(key + 1)
         arr.map(item => {
             if (item.id == id) {
@@ -139,9 +143,9 @@ export default function App({ navigation }) {
         })
 
         if (!flag) {
-            arr.push({ img, key, id, number })
+            arr.push({ img, key, id, number, name ,type})
         }
-        console.log(arr)
+        console.log(diamond)
         setIsLoadingPoke(true)
     }
 
@@ -154,7 +158,7 @@ export default function App({ navigation }) {
                     source={Background}
                     style={styles.imageBackground}
                 >
-                    <Header diamond={diamond} />
+                    <Header diamond={diamond} level={level}/>
 
                     <Body
                         panResponder={panResponder}

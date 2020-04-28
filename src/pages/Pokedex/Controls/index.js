@@ -1,6 +1,6 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import { View, Image, TouchableOpacity } from 'react-native';
-import { useLight } from '../../../store/context'
+import { useLight, LightContext } from '../../../store/context'
 
 import styles from './styles';
 
@@ -10,6 +10,8 @@ import ArrowLeft from '../../../assets/arrowLeft.png'
 export default function Details({ pos, setPos, arr }) {
 
     const { setRed, setGreen } = useLight()
+    const context = useContext(LightContext)
+    const {select,setSelect} = context
 
     const addPos = () => {
         if (pos < (arr.length - 1)) {
@@ -24,7 +26,9 @@ export default function Details({ pos, setPos, arr }) {
     }
 
     const rightClick = () => {
-
+        if(select){
+            setSelect(false)
+        }
         setTimeout(() => {
             setGreen(false)
         }, 100)
@@ -33,7 +37,9 @@ export default function Details({ pos, setPos, arr }) {
     }
 
     const leftClick = () => {
-
+        if(select){
+            setSelect(false)
+        }
         setTimeout(() => {
             setRed(false)
         }, 100)

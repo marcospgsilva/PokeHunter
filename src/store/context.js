@@ -1,16 +1,17 @@
 import React, { createContext, useState, useContext } from 'react'
-import Routes from '../routes'
+
 
 export const LightContext = createContext()
 
-function Context() {
+function Context({children}) {
 
     const [green, setGreen] = useState(false)
     const [red, setRed] = useState(false)
+    const [select, setSelect] = useState(false)
 
     return (
-        <LightContext.Provider value={{ green, setGreen, red, setRed }}>
-            <Routes />
+        <LightContext.Provider value={{ green, setGreen, red, setRed, select,setSelect }}>
+            {children}
         </LightContext.Provider>
     );
 }

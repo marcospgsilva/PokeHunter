@@ -6,7 +6,7 @@ import Avatar from '../../../assets/fotomp.jpg'
 import Star from '../../../assets/star.png'
 import Diamond from '../../../assets/diamond.png'
 
-export default function Header({ diamond }) {
+export default function Header({ diamond, level }) {
 
     return (
         <View style={styles.header}>
@@ -18,7 +18,7 @@ export default function Header({ diamond }) {
             <View style={styles.boxBarPerson}>
                 <View style={styles.boxStar}>
                     <Image source={Star} style={styles.star} />
-                    <Text style={styles.level}>Lv. 1</Text>
+                    <Text style={styles.level}>Lv. {level}</Text>
                 </View>
                 <View style={styles.boxDiamond}>
                     <Image source={Diamond} style={styles.diamond} />
