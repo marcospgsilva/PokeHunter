@@ -2,13 +2,13 @@ import React from 'react';
 
 import Routes from './src/routes'
 
-import Context from './src/store/context'
+import LightProvider from './src/contexts/lightContext'
 
 export default function App() {
 
   return (
-    <Context>
+    <LightProvider>
       <Routes />
-    </Context>
+    </LightProvider>
   )
 }

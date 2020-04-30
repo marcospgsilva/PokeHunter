@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 
-import {LightContext} from '../../../store/context'
+import {LightContext} from '../../../contexts/lightContext'
 
 export default function Details({ arr }) {
     

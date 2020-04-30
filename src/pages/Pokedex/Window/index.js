@@ -5,7 +5,7 @@ import Diamond from '../../../assets/diamond.png'
 
 import styles from './styles';
 
-import {LightContext} from '../../../store/context'
+import {LightContext} from '../../../contexts/lightContext'
 
 export default function Window({ arr, pos }) {
 

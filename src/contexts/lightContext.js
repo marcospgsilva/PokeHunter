@@ -3,7 +3,7 @@ import React, { createContext, useState, useContext } from 'react'
 
 export const LightContext = createContext()
 
-function Context({children}) {
+function LightProvider({children}) {
 
     const [green, setGreen] = useState(false)
     const [red, setRed] = useState(false)
@@ -24,4 +24,4 @@ export function useLight() {
     return { green, setGreen, red, setRed }
 }
 
-export default Context 
+export default LightProvider 

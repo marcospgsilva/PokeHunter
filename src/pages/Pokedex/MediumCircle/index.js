@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { useLight } from '../../../store/context'
+import { useLight } from '../../../contexts/lightContext'
 
 import styles from './styles';
 

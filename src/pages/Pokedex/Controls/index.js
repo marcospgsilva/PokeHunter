@@ -1,6 +1,6 @@
 import React,{useContext} from 'react';
 import { View, Image, TouchableOpacity } from 'react-native';
-import { useLight, LightContext } from '../../../store/context'
+import { useLight, LightContext } from '../../../contexts/lightContext'
 
 import styles from './styles';
 
