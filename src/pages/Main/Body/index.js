@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View } from 'react-native';
 
 import styles from './styles';
@@ -7,27 +7,23 @@ import Pokeball from '../Pokeball'
 import PokeCard from '../PokeCard';
 import HuntButton from '../HuntButton';
 
-export default function Body({
-    panResponder,
-    position,
-    spin,
-    img,
-    name,
-    isLoadingPoke,
-    isLoadingPokeball,
-    value,
-    sortRegion,
-    setIsLoadingPoke,
-    setIsLoadingPokeball
-}) {
+import { HuntContext } from '../../../contexts/huntContext';
+import { GestureContext } from '../../../contexts/gestureContext';
+
+export default function Body() {
+
+    const {isLoadingPoke} = useContext(HuntContext)
+    const {isLoadingPokeball} = useContext(GestureContext)
+    
     return (
+
         <View style={styles.body}>
             {isLoadingPokeball
-                ? <Pokeball panResponder={panResponder} position={position} />
+                ? <Pokeball />
                 : <></>
             }
-            {isLoadingPoke && <PokeCard spin={spin} img={img} name={name} value={value} />}
-            {isLoadingPoke && <HuntButton sortRegion={sortRegion} setIsLoadingPoke={setIsLoadingPoke} setIsLoadingPokeball={setIsLoadingPokeball} />}
+            {isLoadingPoke && <PokeCard />}
+            {isLoadingPoke && <HuntButton />}
         </View>
     );
 }

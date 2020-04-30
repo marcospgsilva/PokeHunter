@@ -10,17 +10,16 @@ import Header from './Header'
 import Body from './Body'
 import Footer from './Footer'
 
-function Pokedex({ route, navigation }) {
+function Pokedex() {
 
-    const { arr } = route.params
     const [pos, setPos] = useState(0)
 
     return (
         <SafeAreaView style={styles.safeArea}>
             <View style={styles.container}>
                 <Header pos={pos} />
-                <Body arr={arr} pos={pos} />
-                <Footer arr={arr} pos={pos} setPos={setPos} />
+                <Body  pos={pos} />
+                <Footer pos={pos} setPos={setPos} />
             </View>
         </SafeAreaView>
     )

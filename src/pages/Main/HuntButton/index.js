@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 
 import styles from './styles';
+import { GestureContext } from '../../../contexts/gestureContext';
+import { HuntContext } from '../../../contexts/huntContext';
 
-export default function HuntButton({ setIsLoadingPoke, setIsLoadingPokeball, sortRegion }) {
+export default function HuntButton() {
+    
+    const { setIsLoadingPokeball, sortRegion } = useContext(GestureContext)
+    const { setIsLoadingPoke } = useContext(HuntContext)
+
     return (
         <View style={styles.buttonBox}>
             <TouchableOpacity onPress={() => {

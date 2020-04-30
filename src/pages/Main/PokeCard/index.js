@@ -1,11 +1,17 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { View, Animated, Text, Image } from 'react-native';
 
 import styles from './styles';
 
 import Diamond from '../../../assets/diamond.png'
 
-export default function PokeCard({ spin, img, name, value }) {
+import { GestureContext } from '../../../contexts/gestureContext';
+import { HuntContext } from '../../../contexts/huntContext';
+
+export default function PokeCard() {
+    
+    const { img, name, value } = useContext(HuntContext)
+    const { spin } = useContext(GestureContext)
     return (
         <Animated.View
             style={[styles.cardMatch, { transform: [{ rotateY: spin }] }]}>

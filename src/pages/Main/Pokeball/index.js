@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Animated, Image } from 'react-native';
 
 
@@ -6,7 +6,12 @@ import PokeballImg from '../../../assets/pokeball.png'
 
 import styles from './styles';
 
-export default function Pokeball({ panResponder, position }) {
+import { GestureContext } from '../../../contexts/gestureContext';
+
+export default function Pokeball() {
+
+    const { panResponder, position } = useContext(GestureContext)
+
     return (
         <Animated.View
             {...panResponder.panHandlers}

@@ -3,12 +3,18 @@ import React from 'react';
 import Routes from './src/routes'
 
 import LightProvider from './src/contexts/lightContext'
+import HuntProvider from './src/contexts/huntContext'
+import GestureProvider from './src/contexts/gestureContext' 
 
 export default function App() {
 
   return (
-    <LightProvider>
-      <Routes />
-    </LightProvider>
+    <HuntProvider>
+      <GestureProvider>
+        <LightProvider>
+          <Routes />
+        </LightProvider>
+      </GestureProvider>
+    </HuntProvider>
   )
 }

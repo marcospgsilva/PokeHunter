@@ -5,7 +5,8 @@ import styles from './styles';
 
 import PokedexImg from '../../../assets/pokedex.png'
 
-export default function PokedexButton({ navigation, arr }) {
+export default function PokedexButton({ navigation }) {
+
     return (
         <View
             style={styles.container}
@@ -14,7 +15,7 @@ export default function PokedexButton({ navigation, arr }) {
                 style={styles.buttonPokedex}
                 title="Pokedex"
                 onPress={() => {
-                    navigation.navigate('Pokedex', { arr: arr })
+                    navigation.navigate('Pokedex')
                 }}>
                 <Image
                     source={PokedexImg}

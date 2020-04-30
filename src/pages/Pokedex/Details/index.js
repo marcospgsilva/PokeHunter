@@ -5,7 +5,7 @@ import styles from './styles';
 
 import {LightContext} from '../../../contexts/lightContext'
 
-export default function Details({ arr }) {
+export default function Details() {
     
     const context = useContext(LightContext)
     const {select,setSelect} = context

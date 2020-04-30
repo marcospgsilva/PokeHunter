@@ -6,11 +6,13 @@ import Diamond from '../../../assets/diamond.png'
 import styles from './styles';
 
 import {LightContext} from '../../../contexts/lightContext'
+import { HuntContext } from '../../../contexts/huntContext';
 
-export default function Window({ arr, pos }) {
+export default function Window({ pos }) {
 
-    const context = useContext(LightContext)
-    const {select} = context
+    const { arr } = useContext(HuntContext)
+    const {select} = useContext(LightContext)
+
     return (
         <View style={styles.container}>
             <View style={styles.windowBox}>
