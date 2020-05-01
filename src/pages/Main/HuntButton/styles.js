@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
         width: '80%',
         marginTop: 20,
         marginBottom: 10,
-        backgroundColor: '#ffaa00',
+        backgroundColor: '#333',
         shadowColor: "rgb(0, 0, 0)",
         shadowOffset: { width: 3, height: 3 },
         shadowOpacity: 0.4,
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         fontSize: 35,
-        color: '#222',
+        color: '#ffaa00',
         fontWeight: 'bold'
     }
 })

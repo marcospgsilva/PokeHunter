@@ -13,6 +13,8 @@ const styles = StyleSheet.create({
         elevation: 7,
         marginBottom: 20,
         backgroundColor: '#ffaa00',
+        borderWidth: 7,
+        borderColor: '#333',
         borderRadius: 50,
         shadowColor: 'rgb(0,0,0)',
         shadowOffset: { width: 2, height: 2 },
@@ -20,8 +22,8 @@ const styles = StyleSheet.create({
         shadowRadius: 7
     },
     pokedexImg: {
-        width: 90,
-        height: 90
+        width: '100%',
+        height: '100%'
     }
 })
 
