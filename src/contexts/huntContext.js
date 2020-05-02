@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useState, useContext } from 'react'
 import api from '../services/api'
 
 export const HuntContext = createContext()
@@ -82,6 +82,33 @@ function HuntProvider ({children}) {
             {children}
         </HuntContext.Provider>
     )
+}
+
+export function useHunt(){
+    const {
+        value,
+        img,
+        name, 
+        arr, 
+        diamond, 
+        level, 
+        handlePoke,
+        isLoadingPoke,
+        setIsLoadingPoke
+    } = useContext(HuntContext)
+
+
+    return {
+        value,
+        img,
+        name, 
+        arr, 
+        diamond, 
+        level, 
+        handlePoke,
+        isLoadingPoke,
+        setIsLoadingPoke
+    }
 }
 
 export default HuntProvider

@@ -19,9 +19,9 @@ function LightProvider({children}) {
 export function useLight() {
     const context = useContext(LightContext)
 
-    const { green, setGreen, red, setRed } = context
+    const { green, setGreen, red, setRed, select, setSelect } = context
 
-    return { green, setGreen, red, setRed }
+    return { green, setGreen, red, setRed, select, setSelect }
 }
 
 export default LightProvider 

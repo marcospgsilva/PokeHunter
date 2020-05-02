@@ -3,8 +3,7 @@ import { StyleSheet } from 'react-native'
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexDirection: 'row',
-        alignContent: 'center'
+        flexDirection: 'row'
     },
     circle1x: {
         marginTop: '10%',

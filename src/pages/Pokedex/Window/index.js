@@ -1,17 +1,17 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { View, Image,Text } from 'react-native';
 
 import Diamond from '../../../assets/diamond.png'
 
 import styles from './styles';
 
-import {LightContext} from '../../../contexts/lightContext'
-import { HuntContext } from '../../../contexts/huntContext';
+import { useLight } from '../../../contexts/lightContext'
+import { useHunt } from '../../../contexts/huntContext';
 
 export default function Window({ pos }) {
 
-    const { arr } = useContext(HuntContext)
-    const {select} = useContext(LightContext)
+    const { arr } = useHunt()
+    const {select} = useLight()
 
     return (
         <View style={styles.container}>

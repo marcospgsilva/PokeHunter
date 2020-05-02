@@ -1,7 +1,7 @@
-import React,{useContext} from 'react';
+import React from 'react';
 import { View, Image, TouchableOpacity } from 'react-native';
-import { useLight, LightContext } from '../../../contexts/lightContext'
-import {HuntContext} from '../../../contexts/huntContext'
+import { useLight,  } from '../../../contexts/lightContext'
+import { useHunt } from '../../../contexts/huntContext'
 
 import styles from './styles';
 
@@ -10,10 +10,8 @@ import ArrowLeft from '../../../assets/arrowLeft.png'
 
 export default function Controls({ pos, setPos }) {
 
-    const { arr } = useContext(HuntContext)
-    const { setRed, setGreen } = useLight()
-    const context = useContext(LightContext)
-    const {select,setSelect} = context
+    const { arr } = useHunt()
+    const { setRed, setGreen, select,setSelect } = useLight()
 
     const addPos = () => {
         if (pos < (arr.length - 1)) {

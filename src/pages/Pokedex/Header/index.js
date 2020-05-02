@@ -10,7 +10,10 @@ export default function Header({ pos, green, red }) {
     return (
         <View style={styles.container}>
             <BigCircle />
+            
+            <View style={{justifyContent:'center',alignSelf: 'center'}}>
             <MediumCircle pos={pos} green={green} red={red} />
+            </View>
         </View>
     );
 }

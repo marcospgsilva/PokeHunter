@@ -1,10 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import {
     View,
-    StatusBar,
     ImageBackground,
-    SafeAreaView,
-    Platform
+    SafeAreaView
 } from 'react-native';
 
 import { GestureContext } from '../../contexts/gestureContext'
@@ -17,10 +15,12 @@ import Header from './Header'
 import Body from './Body'
 import PokedexButton from './PokedexButton'
 
-export default function App({ navigation }) {
+export default function App({ navigation, route }) {
 
     const { sortRegion } = useContext(GestureContext)
 
+    const { nickname } = route.params
+    
     useEffect(() => {
         sortRegion()
     }, [])
@@ -28,12 +28,11 @@ export default function App({ navigation }) {
     return (
         <SafeAreaView style={styles.safeArea}>
             <View style={styles.container}>
-                <StatusBar barStyle={Platform.OS === "ios" ? 'light-content' : 'light-content'} />
                 <ImageBackground
                     source={Background}
                     style={styles.imageBackground}
                 >
-                    <Header/>
+                    <Header nickname={nickname}/>
                     <Body/>
                     <PokedexButton navigation={navigation} />
                 </ImageBackground>

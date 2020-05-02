@@ -1,14 +1,13 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 
-import {LightContext} from '../../../contexts/lightContext'
+import { useLight } from '../../../contexts/lightContext'
 
 export default function Details() {
     
-    const context = useContext(LightContext)
-    const {select,setSelect} = context
+    const {select,setSelect} = useLight()
 
     const selectPoke = () => {
         if(select){

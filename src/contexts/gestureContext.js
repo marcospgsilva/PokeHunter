@@ -93,4 +93,26 @@ function GestureProvider({children}){
           </GestureContext.Provider>
       )
   }
+
+  export function useGesture() {
+        const { 
+        sortRegion, 
+        panResponder, 
+        position, 
+        spin,
+        isLoadingPokeball,
+        setIsLoadingPokeball  
+    } = useContext(GestureContext)
+
+    return {
+        sortRegion, 
+        panResponder, 
+        position, 
+        spin,
+        isLoadingPokeball,
+        setIsLoadingPokeball
+    }
+        
+  }
+
   export default GestureProvider

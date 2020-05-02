@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     },
     level: {
         marginLeft: 10,
-        fontSize: 17,
+        fontSize: 16,
         color: '#ffaa00',
         fontWeight: '700'
     },
