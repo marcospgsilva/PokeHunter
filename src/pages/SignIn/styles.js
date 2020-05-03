@@ -19,17 +19,15 @@ const styles = StyleSheet.create({
         fontSize: 30,
         color: '#ffaa00',
         fontWeight: 'bold',
-        fontFamily: 'Roboto',
-        marginBottom: -20,
+        marginBottom: -10,
     },
     logoBox: {
         justifyContent:'center',
         alignItems:'center',
     },
     pokeLogoName: {
-        fontSize: 76,
+        fontSize: 66,
         color: '#FFF',
-        fontFamily: 'Roboto',
         fontWeight:'bold'
     },
     hunterLogoName: {
@@ -66,7 +64,25 @@ const styles = StyleSheet.create({
         fontSize: 18,
         padding: 10,
         borderRadius: 15
-    }
+    },
+    buttonContainer: {
+        marginTop: '5%',
+    },
+    button: {
+        width: 200, 
+        height: 50,
+        borderRadius: 15,
+        justifyContent:'center',
+        alignSelf:"center", 
+        alignItems:"center",
+        backgroundColor:'#ffaa00'
+        },
+    buttonText: {
+        color:'#333',
+        fontWeight:'bold', 
+        fontSize: 20, 
+        padding: 10
+        }
 })
 
 export default styles

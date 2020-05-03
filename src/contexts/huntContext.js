@@ -61,7 +61,6 @@ function HuntProvider ({children}) {
         if (!flag) {
             arr.push({ img, key, id, number, name ,type})
         }
-        console.log(diamond)
         setIsLoadingPoke(true)
     }
     

@@ -4,7 +4,8 @@ import {
     Text,
     Image, 
     TextInput,
-    KeyboardAvoidingView
+    KeyboardAvoidingView,
+    Keyboard
 } from 'react-native'
 
 import LogoIcon from '../../assets/logoIcon.png'
@@ -25,7 +26,7 @@ function SignIn({navigation}) {
 
     return(
             <View style={styles.container}>
-                <KeyboardAvoidingView  behavior="position" keyboardVerticalOffset={30}>
+                <KeyboardAvoidingView behavior="position">
                 <View style={styles.logoIcon}>
                     <Image source={LogoIcon} style={{width: 120, height: 120}} resizeMode="contain"/>
                 </View>
@@ -48,26 +49,24 @@ function SignIn({navigation}) {
                     <Text style={styles.nickname}>
                         Choose your Nickname
                     </Text>
-                    <TextInput required ref={nicknameRef} placeholder="Nickname" style={styles.inputBox}/>
-                    <TouchableOpacity style={{ 
-                        marginTop: '5%',
-                        width: 200, 
-                        height: 50,
-                        borderRadius: 15,
-                        alignSelf:'center', 
-                        alignItems:"center",
-                        backgroundColor:'#ffaa00'
-                        }} 
-                        onPress={handleSignin}>
-                            <Text style={{
-                                color:'#333',
-                                fontWeight:'bold', 
-                                fontSize: 20, 
-                                padding: 10
-                                }}>
+                    <TextInput 
+                        required 
+                        ref={nicknameRef} 
+                        placeholder="Nickname"
+                        placeholderTextColor="#888" 
+                        style={styles.inputBox}
+                        />
+                    <View style={styles.buttonContainer}>
+                    <TouchableOpacity style={styles.button} 
+                        onPress={()=> {
+                            Keyboard.dismiss()
+                            handleSignin()
+                        }}>
+                            <Text style={styles.buttonText}>
                                     Let's Go
                                 </Text>
                     </TouchableOpacity>
+                    </View>
                 </View>
                 </KeyboardAvoidingView>
             </View>

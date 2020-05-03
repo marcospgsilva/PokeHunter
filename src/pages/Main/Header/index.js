@@ -14,7 +14,6 @@ export default function Header({nickname}) {
 
     return (
         <View style={styles.header}>
-        {console.log(nickname)}
             <View style={styles.avatarBox}>
                 <Image
                     source={Avatar}

@@ -21,6 +21,8 @@ function GestureProvider({children}){
 
     // Declara uma nova instância do objeto Animated
     spinValue = new Animated.Value(0)
+    spinPokeballValue= new Animated.Value(0)
+
 
     // Função que define as propriedades da animação
     Animated.timing(
@@ -32,12 +34,29 @@ function GestureProvider({children}){
         useNativeDriver: true
     }
     ).start()
+
+    Animated.loop(
+        Animated.timing(
+            spinPokeballValue,
+            {
+                toValue: 1,
+                duration: 1000,
+                easing: Easing.linear,
+                useNativeDriver: true
+            }
+            )
+    ).start()
+    
     // Interpolate define o início e o fim da animação
     const spin = this.spinValue.interpolate({
     inputRange: [0, 1],
     outputRange: ['0deg', '360deg']
     })
 
+    const spinPokeball = this.spinPokeballValue.interpolate({
+        inputRange: [0, 1],
+        outputRange: ['0deg', '360deg']
+    })
     // Declara uma nova instância do objeto Animated com valores X e Y, para animações em 2D e 3D
     const position = new Animated.ValueXY()
     // Função que retorna a posição mais recente ( GestureHandler )
@@ -87,7 +106,8 @@ function GestureProvider({children}){
                 position, 
                 spin,
                 isLoadingPokeball,
-                setIsLoadingPokeball 
+                setIsLoadingPokeball,
+                spinPokeball 
             }}>
               {children}
           </GestureContext.Provider>
@@ -101,7 +121,8 @@ function GestureProvider({children}){
         position, 
         spin,
         isLoadingPokeball,
-        setIsLoadingPokeball  
+        setIsLoadingPokeball,
+        spinPokeball  
     } = useContext(GestureContext)
 
     return {
@@ -110,7 +131,8 @@ function GestureProvider({children}){
         position, 
         spin,
         isLoadingPokeball,
-        setIsLoadingPokeball
+        setIsLoadingPokeball,
+        spinPokeball
     }
         
   }

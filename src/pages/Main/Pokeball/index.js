@@ -10,14 +10,18 @@ import { GestureContext } from '../../../contexts/gestureContext';
 
 export default function Pokeball() {
 
+    const { spinPokeball } = useContext(GestureContext)
     const { panResponder, position } = useContext(GestureContext)
 
     return (
         <Animated.View
             {...panResponder.panHandlers}
-            style={[styles.card, position.getLayout()]}>
+            style={[
+                styles.card, 
+                position.getLayout()
+                ]}>
 
-            <Image source={PokeballImg} style={styles.pokeball} resizeMode="contain" />
+            <Animated.Image source={PokeballImg} style={[styles.pokeball, { transform: [{ rotate: spinPokeball }] }]} resizeMode="contain" />
         </Animated.View>
     );
 }

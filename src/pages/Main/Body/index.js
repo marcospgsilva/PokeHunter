@@ -1,9 +1,8 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import { 
     View,
     Modal,
     Text,
-    Button,
     TouchableOpacity
  } from 'react-native';
 
