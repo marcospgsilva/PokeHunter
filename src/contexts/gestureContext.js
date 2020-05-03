@@ -34,7 +34,7 @@ function GestureProvider({children}){
         useNativeDriver: true
     }
     ).start()
-
+    // Animated.loop permite que a animação contida, seja repetida toda vez que se encerra.
     Animated.loop(
         Animated.timing(
             spinPokeballValue,
@@ -47,7 +47,7 @@ function GestureProvider({children}){
             )
     ).start()
     
-    // Interpolate define o início e o fim da animação
+    // Interpolate -> interpola os valores antes de atualizar as propriedades 
     const spin = this.spinValue.interpolate({
     inputRange: [0, 1],
     outputRange: ['0deg', '360deg']

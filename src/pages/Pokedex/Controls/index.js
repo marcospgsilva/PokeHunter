@@ -13,18 +13,21 @@ export default function Controls({ pos, setPos }) {
     const { arr } = useHunt()
     const { setRed, setGreen, select,setSelect } = useLight()
 
+    // Adiciona + 1 na variável POS, para acessar o próximo indice no array de Pokemons.
     const addPos = () => {
+        // Não permite que um indice que não existe seja acessado.
         if (pos < (arr.length - 1)) {
             setPos(pos + 1)
         }
     }
-
+    // Adiciona + 1 na variável POS, para acessar o próximo indice no array de Pokemons.
     const subPos = () => {
+        // Não permite que um indice que não existe seja acessado.
         if (pos != 0) {
             setPos(pos - 1)
         }
     }
-
+    // Controla o estado das luzes da pokedex.
     const rightClick = () => {
         if(select){
             setSelect(false)

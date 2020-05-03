@@ -20,7 +20,7 @@ export default function App({ navigation, route }) {
     const { sortRegion } = useContext(GestureContext)
 
     const { nickname } = route.params
-    
+    // Chama a função para sortear uma região no mapa, assim que a tela principal é carregada.
     useEffect(() => {
         sortRegion()
     }, [])
