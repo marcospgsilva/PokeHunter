@@ -12,7 +12,7 @@
 ![](images/gif2.gif)
 ![](images/gif3.gif)
 
-## O Projeto
+## 📝 O Projeto
 O projeto foi desenvolvido por mim para aprimorar os meus conhecimentos com a ferramenta React Native e será disponibilizado para qualquer desenvolvedor interessado em aprender/estudar as ferramentas utilizadas.
 No geral neste projeto utilizei:
 - Expo,
@@ -26,13 +26,13 @@ No geral neste projeto utilizei:
 - State,
 - Uncontrolled Components entre outros.
 
-## Como funciona o jogo?
+## 🧐 Como funciona o jogo?
 
 O jogo consiste em arrastar a pokebola pelo mapa ( tela do dispositivo ) até encontrar um pokémon.
 Cada Pokémon possui uma quantidade de Diamantes, que irão se acumular e aumentar o seu nível de Mestre Pokémon.
 Todos os pokémons econtrados estão presentes em sua Pokédex.
 
-## Como jogar?
+## 🚀 Como jogar?
 
 Assumindo que você já possua o React Native disponível em sua máquina.
 
@@ -65,7 +65,7 @@ Após finalizado, rode o comando:
 Pronto, o aplicativo está pronto para uso.
 
 
-## Para DEVS
+## 🔧 Para DEVS
 
 Ao ser carregada, a tela principal ( a que contém o mapa ) gera de forma aleatória uma região no mapa, onde será "encontrado" o pokémon.
 Utilizando Gesture Handler e Pan Responder, é possível saber qual é a posição atual do toque na tela. 
@@ -85,5 +85,14 @@ Algumas funcionalidades ainda não foram adicionadas, como adição de DB para s
 Criação de conta entre outros também não foram adicionados, pois este não era o meu objetivo neste projeto.
 
 Para todos que tenham interesse/dúvidas relacionadas ao projeto, estarei disponível em todas as minhas redes sociais.
+
+## ✍️ Author <a name = "author"></a>
+
+👤 **Marcos Gomes**
+
+* Instagram: [@marcospgsilva_](https://www.instagram.com/marcospgsilva_/)
+* LinkedIn: [@marcospgsilva](https://www.linkedin.com/in/marcospgsilva/)
+* Github: [@marcospgsilva](https://github.com/marcospgsilva)
+
 
 
